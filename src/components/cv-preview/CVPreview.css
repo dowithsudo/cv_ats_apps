@@ -1,71 +1,161 @@
-/* CV Preview specific styles - these need to be very simple and robust */
+/* Base CV Styles (Reset) */
 .cv-document {
   color: #000;
   line-height: 1.4;
   font-family: Arial, Helvetica, sans-serif;
   text-align: left;
+  background: white;
+  width: 210mm; /* A4 width */
+  min-height: 297mm; /* A4 height */
+  padding: 40px; /* Safe printing padding */
+  box-sizing: border-box;
+  margin: 0 auto;
+  overflow: hidden; /* Hide overflow */
+  position: relative;
 }
 
-.cv-header {
-  margin-bottom: 1.5rem;
-}
-
-.cv-name {
-  font-size: 24pt;
-  font-weight: bold;
-  text-transform: uppercase;
-  margin-bottom: 0.5rem;
-}
-
-.cv-contact-info {
-  font-size: 10pt;
-  margin-bottom: 0;
-}
-
-.cv-section {
-  margin-bottom: 1.5rem;
-}
-
-.cv-section-title {
-  font-size: 12pt;
-  font-weight: bold;
-  text-transform: uppercase;
-  border-bottom: 1px solid #000;
-  margin-bottom: 0.5rem;
-  padding-bottom: 2px;
-}
-
-.cv-item {
-  margin-bottom: 1rem;
-}
-
-.cv-item-header {
-  font-weight: bold;
-  font-size: 11pt;
-}
-
-.cv-item-sub {
-  font-style: italic; /* Generally okay for ATS, but plain is safer. User said "Teks murni". Italic is text attribute, usually fine. */
-  font-size: 10pt;
-}
-
-.cv-item-date {
-  font-size: 10pt;
-}
-
+/* Utilities */
 .cv-list {
   margin-top: 0.25rem;
   padding-left: 1.25rem;
 }
-
 .cv-list-item {
   margin-bottom: 0.25rem;
-  font-size: 10pt;
 }
 
+/* =========================================
+   1. ATS Standard (Default / Strict)
+   Focus: Maximum readability, no graphics
+   ========================================= */
+.cv-document.ats-standard {
+  font-family: 'Times New Roman', Times, serif;
+}
+.ats-standard .cv-header { text-align: center; margin-bottom: 2rem; }
+.ats-standard .cv-name { font-size: 24pt; font-weight: bold; text-transform: uppercase; }
+.ats-standard .cv-contact-info { font-size: 11pt; margin-top: 5px; }
+.ats-standard .cv-section { margin-bottom: 1.5rem; }
+.ats-standard .cv-section-title { 
+  font-size: 12pt; 
+  font-weight: bold; 
+  text-transform: uppercase; 
+  border-bottom: 1px solid #000; 
+  margin-bottom: 0.5rem; 
+}
+.ats-standard .cv-item-header { font-weight: bold; font-size: 12pt; }
+
+/* =========================================
+   2. Professional Classic (Corporate)
+   Focus: Elegant, Serif, Traditional Layout
+   ========================================= */
+.cv-document.professional-classic {
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  color: #333;
+}
+.professional-classic .cv-header { border-bottom: 2px solid #333; padding-bottom: 1.5rem; margin-bottom: 2rem; }
+.professional-classic .cv-name { font-size: 28pt; font-weight: normal; color: #1a1a1a; }
+.professional-classic .cv-contact-info { font-style: italic; color: #555; margin-top: 0.5rem; }
+.professional-classic .cv-section-title { 
+  font-size: 14pt; 
+  font-weight: normal; 
+  border-bottom: 1px solid #999; 
+  color: #1a1a1a;
+  letter-spacing: 1px;
+}
+.professional-classic .cv-item-header { font-weight: bold; color: #000; }
+
+/* =========================================
+   3. Professional Modern (Clean Tech)
+   Focus: Sans-serif, Blue Accents, Crisp
+   ========================================= */
+.cv-document.professional-modern {
+  font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: #2c3e50;
+}
+.professional-modern .cv-name { color: #2c3e50; font-weight: 800; font-size: 26pt; letter-spacing: -0.5px; }
+.professional-modern .cv-contact-info { color: #34495e; font-size: 10pt; font-weight: 500; }
+.professional-modern .cv-section-title {
+  color: #2980b9;
+  font-size: 12pt;
+  font-weight: 700;
+  text-transform: uppercase;
+  border-left: 4px solid #2980b9;
+  padding-left: 10px;
+  border-bottom: none;
+  background: #f0f6fa;
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+.professional-modern .cv-item-header { font-weight: 700; color: #2c3e50; }
+
+/* =========================================
+   4. Creative Bold (High Contrast)
+   Focus: Dark Header, White Text
+   ========================================= */
+.cv-document.creative-bold {
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  padding-top: 0;
+}
+.creative-bold .cv-header {
+  background-color: #2c3e50;
+  color: white;
+  margin: 0 -40px 2rem -40px; /* Bleed out to edges accounting for padding */
+  padding: 3rem 40px;
+  text-align: center;
+}
+.creative-bold .cv-contact-info { color: #ecf0f1; }
+.creative-bold .cv-section-title {
+  color: #e74c3c;
+  font-size: 16pt;
+  border-bottom: 2px solid #e74c3c;
+  text-transform: none;
+}
+.creative-bold .cv-item-header { font-size: 13pt; color: #2c3e50; }
+
+/* =========================================
+   5. Creative Clean (Minimalist Grid look)
+   Focus: Clean lines, Teal accents, Side aligned titles
+   Only simulates grid via margins/borders to keep simple DOM order
+   ========================================= */
+.cv-document.creative-clean {
+  font-family: 'Verdana', sans-serif;
+}
+.creative-clean .cv-name { color: #009688; border-bottom: 2px solid #009688; padding-bottom: 10px; display: inline-block; }
+.creative-clean .cv-section-title {
+  color: #009688;
+  font-size: 11pt;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  border-bottom: 1px dotted #ccc;
+}
+.creative-clean .cv-item-header { font-size: 11pt; font-weight: bold; }
+.creative-clean .cv-item-date { color: #00796b; font-weight: bold; }
+
+
+/* Print Overrides */
 @media print {
+  @page { margin: 0; size: auto; }
+  body { margin: 0; }
   .cv-document {
-    width: 100%;
-    margin: 0;
+    width: 100% !important;
+    max-width: none !important;
+    margin: 0 !important;
+    padding: 1cm !important; /* Enforce print padding */
+    box-shadow: none !important;
+    border: none !important;
+    min-height: auto !important;
+    height: auto !important;
+  }
+  
+  /* Bold header adjustment for print */
+  .cv-document.creative-bold .cv-header {
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+    margin: -1cm -1cm 2rem -1cm; /* Counteract print padding */
+    padding: 2cm 1cm 1cm 1cm;
+  }
+  
+  .cv-document.professional-modern .cv-section-title {
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
   }
 }

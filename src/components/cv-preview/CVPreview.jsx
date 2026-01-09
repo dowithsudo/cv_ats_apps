@@ -1,7 +1,7 @@
 import React from 'react';
 import './CVPreview.css';
 
-const CVPreview = ({ data }) => {
+const CVPreview = ({ data, template = 'ats-standard' }) => {
   const {
     personalInfo,
     summary,
@@ -53,7 +53,7 @@ const CVPreview = ({ data }) => {
   };
 
   return (
-    <div id="cv-preview" className="cv-document">
+    <div id="cv-preview" className={`cv-document ${template}`}>
       {/* Header */}
       <div className="cv-header">
         <div className="cv-name">{personalInfo?.fullName || 'YOUR NAME'}</div>

@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useSearchParams } from 'react-router-dom';
 import { initialCVData } from '../utils/initialData';
 import CVPreview from '../components/cv-preview/CVPreview';
 import Step1Personal from '../components/cv-form/steps/Step1Personal';
@@ -10,7 +11,7 @@ import Step6Certifications from '../components/cv-form/steps/Step6Certifications
 import Step7Projects from '../components/cv-form/steps/Step7Projects';
 import Step8Languages from '../components/cv-form/steps/Step8Languages';
 import Step9Optional from '../components/cv-form/steps/Step9Optional';
-import { ArrowLeft, ArrowRight, Printer, CheckCircle } from 'lucide-react';
+import { ArrowLeft, ArrowRight, Printer, CheckCircle, LayoutTemplate } from 'lucide-react';
 import './CreateCV.css';
 
 const STEPS = [
@@ -26,9 +27,19 @@ const STEPS = [
   { id: 10, title: 'Selesai', component: null }, // Special case
 ];
 
+const TEMPLATE_OPTIONS = [
+  { id: 'ats-standard', label: 'ATS Standard' },
+  { id: 'professional-classic', label: 'Professional Classic' },
+  { id: 'professional-modern', label: 'Professional Modern' },
+  { id: 'creative-bold', label: 'Creative Bold' },
+  { id: 'creative-clean', label: 'Creative Clean' },
+];
+
 const CreateCV = () => {
+  const [searchParams] = useSearchParams();
   const [currentStep, setCurrentStep] = useState(1);
   const [cvData, setCvData] = useState(initialCVData);
+  const [template, setTemplate] = useState(searchParams.get('template') || 'ats-standard');
 
   const updateData = (newData) => {
     setCvData(prev => ({ ...prev, ...newData }));
@@ -122,9 +133,24 @@ const CreateCV = () => {
                 <CheckCircle size={64} className="highlight" style={{ margin: '0 auto 1rem' }} />
                 <h2>Sudah Siap!</h2>
                 <p style={{ color: 'var(--text-secondary)', marginBottom: '2rem' }}>
-                  CV Anda siap dalam format standar ramah ATS. 
+                  CV Anda siap dalam format <strong>{TEMPLATE_OPTIONS.find(t => t.id === template)?.label}</strong>.
                   Cek preview di sebelah kanan (atau di bawah pada mobile).
                 </p>
+                <div style={{ marginBottom: '2rem', textAlign: 'left', maxWidth: '400px', margin: '0 auto 2rem' }}>
+                   <label style={{ display: 'block', marginBottom: '0.5rem', color: 'var(--text-secondary)' }}>
+                     Ganti Template (Preview):
+                   </label>
+                   <select 
+                     value={template} 
+                     onChange={(e) => setTemplate(e.target.value)}
+                     className="form-select"
+                     style={{ width: '100%', padding: '0.75rem', borderRadius: '8px', background: 'rgba(0,0,0,0.3)', color: 'white', border: '1px solid var(--border-color)' }}
+                   >
+                     {TEMPLATE_OPTIONS.map(opt => (
+                       <option key={opt.id} value={opt.id}>{opt.label}</option>
+                     ))}
+                   </select>
+                </div>
                 <p style={{ marginBottom: '2rem' }}>
                   Klik tombol di bawah ini untuk menyimpan sebagai PDF.
                 </p>
@@ -132,8 +158,9 @@ const CreateCV = () => {
                   <Printer size={24} /> Unduh PDF
                 </button>
                 <div style={{ marginTop: '2rem', fontSize: '0.9rem', color: 'var(--text-secondary' }}>
-                  <strong>Tip:</strong> Di dialog print, pastikan "Background graphics" TIDAK dicentang untuk teks paling bersih, 
-                  meskipun desain ini aman. Simpan sebagai PDF.
+                  <strong>Tip:</strong> Di dialog print, pastikan "Background graphics" 
+                  {template.includes('creative') || template.includes('modern') ? ' DICENTANG ' : ' TIDAK dicentang '} 
+                  untuk hasil terbaik.
                 </div>
               </div>
             </div>
@@ -166,6 +193,38 @@ const CreateCV = () => {
 
       {/* Preview Section */}
       <div className="cv-preview-section" ref={containerRef}>
+        
+        {/* Template Selector Overlay for Preview Area */}
+        <div style={{ 
+          marginBottom: '1rem', 
+          display: 'flex', 
+          justifyContent: 'space-between', 
+          alignItems: 'center',
+          padding: '0 1rem' 
+        }} className="no-print">
+           <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', color: 'var(--text-secondary)' }}>
+             <LayoutTemplate size={16} />
+             <span style={{ fontSize: '0.9rem' }}>Template:</span>
+           </div>
+           <select 
+             value={template} 
+             onChange={(e) => setTemplate(e.target.value)}
+             style={{ 
+               background: 'transparent',
+               color: 'var(--primary-glow)',
+               border: 'none',
+               textAlign: 'right',
+               cursor: 'pointer',
+               fontWeight: '600',
+               fontSize: '0.9rem'
+             }}
+           >
+             {TEMPLATE_OPTIONS.map(opt => (
+               <option key={opt.id} value={opt.id} style={{ background: '#222' }}>{opt.label}</option>
+             ))}
+           </select>
+        </div>
+
         <div 
           className="preview-container"
           style={{ 
@@ -174,7 +233,7 @@ const CreateCV = () => {
             // But usually just transforming is enough if parent overflows
           }}
         >
-          <CVPreview data={cvData} />
+          <CVPreview data={cvData} template={template} />
         </div>
       </div>
     </div>
