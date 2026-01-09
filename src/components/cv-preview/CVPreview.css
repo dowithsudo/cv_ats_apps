@@ -1,0 +1,71 @@
+/* CV Preview specific styles - these need to be very simple and robust */
+.cv-document {
+  color: #000;
+  line-height: 1.4;
+  font-family: Arial, Helvetica, sans-serif;
+  text-align: left;
+}
+
+.cv-header {
+  margin-bottom: 1.5rem;
+}
+
+.cv-name {
+  font-size: 24pt;
+  font-weight: bold;
+  text-transform: uppercase;
+  margin-bottom: 0.5rem;
+}
+
+.cv-contact-info {
+  font-size: 10pt;
+  margin-bottom: 0;
+}
+
+.cv-section {
+  margin-bottom: 1.5rem;
+}
+
+.cv-section-title {
+  font-size: 12pt;
+  font-weight: bold;
+  text-transform: uppercase;
+  border-bottom: 1px solid #000;
+  margin-bottom: 0.5rem;
+  padding-bottom: 2px;
+}
+
+.cv-item {
+  margin-bottom: 1rem;
+}
+
+.cv-item-header {
+  font-weight: bold;
+  font-size: 11pt;
+}
+
+.cv-item-sub {
+  font-style: italic; /* Generally okay for ATS, but plain is safer. User said "Teks murni". Italic is text attribute, usually fine. */
+  font-size: 10pt;
+}
+
+.cv-item-date {
+  font-size: 10pt;
+}
+
+.cv-list {
+  margin-top: 0.25rem;
+  padding-left: 1.25rem;
+}
+
+.cv-list-item {
+  margin-bottom: 0.25rem;
+  font-size: 10pt;
+}
+
+@media print {
+  .cv-document {
+    width: 100%;
+    margin: 0;
+  }
+}
