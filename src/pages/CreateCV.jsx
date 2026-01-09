@@ -29,6 +29,7 @@ const STEPS = [
 
 const TEMPLATE_OPTIONS = [
   { id: 'ats-standard', label: 'ATS Standard' },
+  { id: 'ats-modern', label: 'ATS Modern' },
   { id: 'professional-classic', label: 'Professional Classic' },
   { id: 'professional-modern', label: 'Professional Modern' },
   { id: 'creative-bold', label: 'Creative Bold' },

@@ -40,6 +40,7 @@ const Templates = () => {
 
   const templates = [
     { id: 'ats-standard', name: 'ATS Standard', description: 'Clean, simple, and 100% ATS optimized.', type: 'ATS' },
+    { id: 'ats-modern', name: 'ATS Modern', description: 'Contemporary sans-serif style that remains ATS friendly.', type: 'ATS' },
     { id: 'professional-classic', name: 'Professional Classic', description: 'Traditional serif style for corporate roles.', type: 'Professional' },
     { id: 'professional-modern', name: 'Professional Modern', description: 'Clean lines with subtle blue accents.', type: 'Professional' },
     { id: 'creative-bold', name: 'Creative Bold', description: 'High contrast header for standing out.', type: 'Creative' },

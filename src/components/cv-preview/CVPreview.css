@@ -131,6 +131,50 @@
 .creative-clean .cv-item-date { color: #00796b; font-weight: bold; }
 
 
+/* =========================================
+   6. ATS Modern (Clean & Contemporary)
+   Focus: Sans-serif, Open spacing, Minimalist
+   ========================================= */
+.cv-document.ats-modern {
+  font-family: 'Roboto', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  color: #222;
+}
+.ats-modern .cv-header { 
+  margin-bottom: 2rem; 
+  border-bottom: 2px solid #222; 
+  padding-bottom: 1rem;
+}
+.ats-modern .cv-name { 
+  font-size: 30pt; 
+  font-weight: 900; 
+  letter-spacing: -1px;
+  text-transform: none; /* Keep natural case */
+}
+.ats-modern .cv-contact-info { 
+  font-size: 10pt; 
+  margin-top: 0.5rem; 
+  color: #555;
+}
+.ats-modern .cv-section-title { 
+  font-size: 11pt; 
+  font-weight: 800; 
+  text-transform: uppercase; 
+  border-bottom: none; 
+  margin-bottom: 0.5rem; 
+  letter-spacing: 1.5px;
+  color: #000;
+}
+.ats-modern .cv-item-header { 
+  font-weight: 700; 
+  font-size: 11pt; 
+}
+.ats-modern .cv-item-date {
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 9pt;
+  color: #444;
+}
+
+
 /* Print Overrides */
 @media print {
   @page { margin: 0; size: auto; }
